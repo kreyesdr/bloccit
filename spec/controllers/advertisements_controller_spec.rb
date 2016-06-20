@@ -1,7 +1,7 @@
 require 'rails_helper'
 include RandomData
 
-RSpec.describe AdvertisementController, type: :controller do
+RSpec.describe AdvertisementsController, type: :controller do
 
 
   let (:my_ad) do
