@@ -1,6 +1,6 @@
 class SponsoredPostsController < ApplicationController
   def show
-    @sponsored_post = SponsoredPost.find(params[:id])
+    @sponsored_posts = SponsoredPost.find(params[:id])
   end
 
   def new
@@ -13,10 +13,12 @@ class SponsoredPostsController < ApplicationController
     @sponsored_post.title = params[:sponsored_post][:title]
     @sponsored_post.body = params[:sponsored_post][:body]
     @sponsored_post.price = params[:sponsored_post][:price]
+    @topic = Topic.find(params[:topic_id])
+    @sponsored_post.topic = @topic
 
     if @sponsored_post.save
       flash[:notice] = 'Sponsored post was created successfully'
-      redirect_to [@sponsored_post.topic, @sponsored_post]
+      redirect_to @topic
     else
       flash.now[:alert] = 'Error creating topic. Please try again'
       render :new
