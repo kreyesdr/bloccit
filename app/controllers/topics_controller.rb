@@ -13,10 +13,6 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new
-  end
-
-  def create
-    @topic = Topic.new
     @topic.name = params[:topic][:name]
     @topic.description = params[:topic][:description]
     @topic.public = params[:topic][:public]
