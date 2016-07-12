@@ -14,7 +14,7 @@ class SponsoredPostsController < ApplicationController
     @sponsored_post.body = params[:sponsored_post][:body]
     @sponsored_post.price = params[:sponsored_post][:price]
     @topic = Topic.find(params[:topic_id])
-git
+
     if @sponsored_post.save
       flash[:notice] = 'Sponsored post was created successfully'
       redirect_to @topic

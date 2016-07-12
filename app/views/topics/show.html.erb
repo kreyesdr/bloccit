@@ -13,7 +13,7 @@
               <%= link_to post.title, topic_post_path(@topic, post) %>
             </h4>
             <small>
-              submitted <%= time_ago_in_words(post.created_at) %> ago <br>
+              submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> <br>
               <%= post.comments.count %> Comments
             </small>
           </div>
@@ -26,7 +26,7 @@
            <span>Sponsored Post:</span> <%= link_to s_post.title, topic_sponsored_post_path(@topic, s_post) %>
           </h4>
           <small>
-            submitted <%= time_ago_in_words(s_post.created_at) %> ago
+            submitted <%= time_ago_in_words(s_post.created_at) %>
           </small>
         </div>
       </div>

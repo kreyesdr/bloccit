@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AdvertisementController, type: :model do
+RSpec.describe AdvertisementsController, type: :model do
 
   let (:advertisement) { Advertisement.create! }
 
