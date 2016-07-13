@@ -11,14 +11,12 @@ RSpec.describe User, type: :model do
 
 
   # Tests for Email
-
   it { is_expected.to validate_presence_of(:email) }
   it { is_expected.to validate_uniqueness_of(:email) }
   it { is_expected.to validate_length_of(:email).is_at_least(3) }
   it { is_expected.to allow_value('user@bloccit.com').for(:email) }
 
   #Tests for Password
-
   it { is_expected.to validate_presence_of(:password) }
   it { is_expected.to have_secure_password }
   it { is_expected.to validate_length_of(:password).is_at_least(6) }
@@ -34,6 +32,47 @@ RSpec.describe User, type: :model do
       expect(user.name).to eq 'Bloc User'
     end
 
+    it 'responds to role' do
+      expect(user).to respond_to(:role)
+    end
+
+    it 'responds to admin?' do
+      expect(user).to respond_to(:admin?)
+    end
+
+    it 'responds to member?' do
+      expect(user).to respond_to(:member?)
+    end
+  end
+
+  describe 'roles' do
+    it 'is member by default' do
+      expect(user.role).to eq('member')
+    end
+
+    context 'member user' do
+      it 'returns true for #member?' do
+        expect(user.member?).to be_truthy
+      end
+
+      it 'returns false for #admin?' do
+        expect(user.admin?).to be_falsey
+      end
+    end
+
+    context 'admin user' do
+      before do
+        user.admin!
+      end
+
+      it 'returns false for #member?' do
+        expect(user.member?).to be_falsey
+      end
+
+      it 'returns true for #admin?' do
+        expect(user.admin?).to be_truthy
+      end
+    end
   end
 
   describe 'invalid user' do
