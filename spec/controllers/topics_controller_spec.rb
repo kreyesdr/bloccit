@@ -230,7 +230,8 @@ RSpec.describe TopicsController, type: :controller do
     describe "POST create" do
       it "returns http redirect" do
         post :create, topic: {name: RandomData.random_sentence, description: RandomData.random_paragraph}
-        expect(response).to redirect_to(topics_path)
+        topic = Topic.last
+        expect(response).to redirect_to(topic)
       end
     end
 

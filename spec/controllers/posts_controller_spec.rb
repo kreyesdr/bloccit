@@ -151,14 +151,15 @@ RSpec.describe PostsController, type: :controller do
     describe "POST create" do
       it "returns http redirect" do
         post :create, topic_id: my_topic.id, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}
-        expect(response).to redirect_to(new_session_path)
+        post = Post.last
+        expect(response).to redirect_to(topic_post_path(my_topic, post))
       end
     end
 
     describe "DELETE destroy" do
       it "returns http redirect" do
         delete :destroy, topic_id: my_topic.id, id: my_post.id
-        expect(response).to redirect_to(new_session_path)
+        expect(response).to redirect_to(topic_path my_topic)
       end
     end
   end
