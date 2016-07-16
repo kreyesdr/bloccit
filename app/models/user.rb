@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
             length: {minimum: 3, maximum: 254}
   has_secure_password
 
-  enum role: [:member, :admin, :moderator]
+  enum role: [:member, :admin]
 
   def name_upcase
     if name
