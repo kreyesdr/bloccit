@@ -6,39 +6,56 @@
 <div class="row">
   <div class="col-md-8">
     <p class="lead">
-      <%= render partial: 'labels/list', locals: { labels: @topic.labels } %>
-      <br />
-      <%= @topic.description %>
+      <%= render partial: 'labels/list', locals: {labels: @topic.labels} %>
     </p>
-    <% if current_user %>
-        <%= link_to 'New Post', new_topic_post_path(@topic), class: 'btn btn-success' %>
-    <% end %>
-    <%= link_to 'New Sponsored Post', new_topic_sponsored_post_path(@topic, :sponsored_post), class: 'btn btn-success' %>
-    <% @topic.posts.each do |post| %>
+    <br/>
+    <%= @topic.description %>
+    <% @topic.comments.each do |comments| %>
         <div class="media">
           <div class="media-body">
             <h4 class="media-heading">
-              <%= link_to post.title, topic_post_path(@topic, post) %>
-              <%= render partial: 'labels/list', locals: { labels: post.labels } %>
+              <span>Comment:</span> <%= comments.body %>
             </h4>
             <small>
-              submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> <br>
-              <%= post.comments.count %> Comments
+              submitted <%= time_ago_in_words(comments.created_at) %>
             </small>
           </div>
         </div>
     <% end %>
-    <% @topic.sponsored_posts.each do |s_post| %>
-        <div class="media">
-          <div class="media-body">
-            <h4 class="media-heading">
-              <span>Sponsored Post:</span> <%= link_to s_post.title, topic_sponsored_post_path(@topic, s_post) %>
-            </h4>
-            <small>
-              submitted <%= time_ago_in_words(s_post.created_at) %>
-            </small>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-8">
+      <% if current_user %>
+          <%= link_to 'New Post', new_topic_post_path(@topic), class: 'btn btn-success' %>
+      <% end %>
+      <%= link_to 'New Sponsored Post', new_topic_sponsored_post_path(@topic, :sponsored_post), class: 'btn btn-success' %>
+      <% @topic.posts.each do |post| %>
+          <div class="media">
+            <div class="media-body">
+              <h4 class="media-heading">
+                <%= link_to post.title, topic_post_path(@topic, post) %>
+                <%= render partial: 'labels/list', locals: {labels: post.labels} %>
+              </h4>
+              <small>
+                submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> <br>
+                <%= post.comments.count %> Comments
+              </small>
+            </div>
           </div>
-        </div>
-    <% end %>
+      <% end %>
+      <% @topic.sponsored_posts.each do |s_post| %>
+          <div class="media">
+            <div class="media-body">
+              <h4 class="media-heading">
+                <span>Sponsored Post:</span> <%= link_to s_post.title, topic_sponsored_post_path(@topic, s_post) %>
+              </h4>
+              <small>
+                submitted <%= time_ago_in_words(s_post.created_at) %>
+              </small>
+            </div>
+          </div>
+      <% end %>
+    </div>
   </div>
 </div>
