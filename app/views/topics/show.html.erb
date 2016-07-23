@@ -12,6 +12,7 @@
     <%= link_to 'New Sponsored Post', new_topic_sponsored_post_path(@topic, :sponsored_post), class: 'btn btn-success' %>
     <% @topic.posts.each do |post| %>
         <div class="media">
+          <%= render partial: 'votes/voter', locals: { post: post } %>
           <div class="media-body">
             <h4 class="media-heading">
               <%= link_to post.title, topic_post_path(@topic, post) %>
