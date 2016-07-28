@@ -211,7 +211,6 @@ RSpec.describe TopicsController, type: :controller do
         post :create, {topic: {name: RandomData.random_sentence, description: RandomData.random_paragraph}}
         expect(response).to redirect_to Topic.last
       end
-
     end
 
     describe "GET edit" do
