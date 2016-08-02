@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase if email.present? }
   before_save :name_upcase
   before_save { self.role ||= :member }
+  before_create :generate_auth_token
 
   validates :name, length: {minimum: 1, maximum: 100}, presence: true
 
@@ -28,6 +29,13 @@ class User < ActiveRecord::Base
         name_array << n.capitalize
       end
       self.name = name_array.join(' ')
+    end
+  end
+
+  def generate_auth_token
+    loop do
+      self.auth_token = SecureRandom.base64(64)
+      break unless User.find_by(auth_token: auth_token)
     end
   end
 end
