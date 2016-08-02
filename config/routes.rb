@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :advertisements
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
 
   resources :sessions, only: [:new, :create, :destroy]
 
@@ -35,5 +35,4 @@ Rails.application.routes.draw do
       resources :topics, only: [:index, :show]
     end
   end
-
 end
