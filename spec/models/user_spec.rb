@@ -90,6 +90,12 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '#generate_auth_token' do
+    it 'creates a token' do
+      expect(user.auth_token).to_not be_nil
+    end
+  end
+
   describe '.avatar_url' do
     let(:known_user) { create(:user, email: 'blochead@bloc.io') }
     it 'returns the proper gravatar url for a known email entity' do
