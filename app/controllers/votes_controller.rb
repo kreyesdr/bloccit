@@ -21,6 +21,10 @@ class VotesController < ApplicationController
     else
       @vote = current_user.votes.create(value: new_value, post: @post)
     end
-  end
 
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 end

@@ -49,8 +49,6 @@ RSpec.describe CommentsController, type: :controller do
     end
   end
 
-
-  # #8
   context "member user doing CRUD on a comment they own" do
     before do
       create_session(my_user)
